@@ -1,4 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+
 import { AuthService } from '../authentication/auth.service';
 
 @Component({
@@ -6,12 +8,23 @@ import { AuthService } from '../authentication/auth.service';
   templateUrl: './user-house-main.component.html',
   styleUrls: ['./user-house-main.component.css']
 })
-export class UserHouseMainComponent {
+export class UserHouseMainComponent implements OnInit {
 
   isAuthenticated = false;
+  navbarDisplay = false
 
-  constructor(private authService: AuthService) { }
+  constructor(private router: Router) {
+   }
 
+  ngOnInit(): void {
+    console.log(' route snapshot:', this.router.url)
+    if (this.router.url === '/dashboard/summary') {
+      this.navbarDisplay = false
+    }
+    else {
+      this.navbarDisplay = true;
+    }
+  }
 
 
 }

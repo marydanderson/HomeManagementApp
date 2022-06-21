@@ -1,0 +1,19 @@
+/* body {
+  background-image: url('./housebackground.png');
+  background-size: auto 1000px;
+
+} */
+
+
+
+.bg{
+  background-image:  url('./housebackground.png');
+  background-size: cover;
+  background-position: bottom left;
+}
+
+.container {
+  margin: 0%;
+  padding: 0%;
+  max-width: 100%;
+}

@@ -1,16 +1,51 @@
-<div class="container">
-  <div class="row">
-    <div class="col-7">
-      <app-maintenance-list ></app-maintenance-list>
-    </div>
-    <div class="col">
-      <app-financial-summary></app-financial-summary>
-    </div>
-  </div>
-  <br>
-  <div class="row">
-    <div class="col" >
-      <app-project-wish></app-project-wish>
+<div class="container-signout">
+  <div class="row justify-content-start">
+    <div class="col text-left">
+      <button class="btn main-button" (click)="onSignOut()">Sign Out</button>
+      <span class="welcome-heading my-1">
+        Welcome home, {{user.displayName}}
+
+      </span>
     </div>
   </div>
 </div>
+<div class="container-bg">
+  <div class="row justify-content-end">
+    <div class="col text-right navbar-heading" >
+      <a routerLink="/dashboard/projects">
+        Projects
+      </a>
+    </div>
+  </div>
+  <div class="row justify-content-end" >
+    <div class="col text-right  navbar-heading">
+      <a routerLink="/dashboard/financials">
+        Financials
+      </a>
+    </div>
+  </div>
+  <div class="row justify-content-end">
+    <div class="col text-right  navbar-heading">
+      <a  routerLink="/rooms">
+        Rooms
+      </a>
+    </div>
+  </div>
+  <div class="row justify-content-end">
+    <div class="col text-right  navbar-heading" >
+      <a routerLink="/dashboard/maintenance">
+        Maintenance
+      </a>
+    </div>
+  </div>
+  <div class="row justify-content-end">
+    <div class="col text-right  navbar-heading" >
+      <a routerLink="/dashboard/maintenance">
+        User Profile
+      </a>
+    </div>
+  </div>
+
+</div>
+
+

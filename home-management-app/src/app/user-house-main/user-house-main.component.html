@@ -1,7 +1,11 @@
-<div>
-  <app-navbar></app-navbar>
-  <router-outlet></router-outlet>
+<div class="container bg">
+
+      <app-navbar *ngIf="navbarDisplay"></app-navbar>
+      <router-outlet></router-outlet>
+
+
 </div>
+
 
 
 
