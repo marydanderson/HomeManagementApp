@@ -9,7 +9,8 @@ export class ProjectScope {
     public unitPrice?: number,
     public calculatedPrice?: number,
     public url?: string,
-    public photo?: string
+    public photo?: string,
+    public estGrandTotal?: number
   ) {}
 }
 

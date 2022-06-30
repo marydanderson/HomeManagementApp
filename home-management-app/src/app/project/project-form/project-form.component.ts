@@ -1,7 +1,7 @@
 // -------------TEMPLATE DRIVEN APPROACH START --------
 
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, ViewChild, OnChanges, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -23,7 +23,8 @@ export class ProjectFormComponent implements OnInit {
     room: '',
     description: '',
     status: '',
-    grandTotal: 0
+    grandTotal: 0,
+    estTotal: 0,
   }
 
   submittedStatus = false;
@@ -35,8 +36,6 @@ export class ProjectFormComponent implements OnInit {
   constructor(
     private projectService: ProjectService,
     private route: ActivatedRoute,
-    private router: Router,
-    private http: HttpClient,
     ) { }
 
   ngOnInit(): void {
@@ -55,7 +54,8 @@ export class ProjectFormComponent implements OnInit {
         form.value.projectRoom,
         form.value.projectDescription,
         form.value.projectStatus,
-        form.value.grandTotal,
+        0,
+        form.value.estTotal
     )
     console.log(this.projectDetails)
     // Add project to database w/ service

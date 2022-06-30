@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { LoanApiSummary, LoanFormInput } from './loan-amor.model';
+import { CompiledLoanDataObject, LoanApiSummary, LoanFormInput } from './loan-amor.model';
 import { LoanPaymentSchedule } from './loan-amor.model';
 import { LoanApiService } from '../loan-api.service';
 
@@ -15,17 +15,19 @@ import { LoanApiService } from '../loan-api.service';
 // API DOC: https://www.commercialloandirect.com/amortization-schedule-api.html
 
 export class LoanAmorizationFormComponent implements OnInit {
-
-  constructor(private http: HttpClient, private loanApiService: LoanApiService) { }
-
-  ngOnInit(): void {
-  }
-
   loanScheduleData: LoanPaymentSchedule[] = [];
   loanSummaryData: LoanApiSummary[] = [];
   loanCompiledData: Object;
   loanTotalInterest = 0;
   purchasePrice: number = 0;
+  // for initializing blank Compiled loan object for firestore:
+
+  constructor(private http: HttpClient, private loanApiService: LoanApiService) { }
+
+  ngOnInit(): void {
+
+  }
+
 
 
   // disable form submit if required fields are blank
@@ -55,9 +57,8 @@ export class LoanAmorizationFormComponent implements OnInit {
       .subscribe((apiResponse => {
         // Find Age of Loan
         this.loanApiService.calculateUpToYearInterest(apiResponse, this.calculateLoanAge(loanOriginationDate))
+        this.loanApiService.saveLoanData(apiResponse, this.purchasePrice) // save loan Data (summary, payment summary, total interest)
 
-        // save loan Data (summary, payment summary, total interest)
-        this.loanApiService.saveLoanData(apiResponse, this.purchasePrice)
       }
       ));
 

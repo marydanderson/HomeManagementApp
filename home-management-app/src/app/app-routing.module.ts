@@ -3,7 +3,6 @@ import { RouterModule, Routes } from "@angular/router";
 import { HomeSummaryComponent } from "./home-summary/home-summary.component";
 import { MaintenanceListComponent } from "./maintenance/maintenance-list/maintenance-list.component";
 import { EnterHomeComponent } from "./enter-home/enter-home.component";
-import { UserHouseMainComponent } from "./user-house-main/user-house-main.component";
 import { ProjectListComponent } from "./project/project-list/project-list.component";
 import { InspirationComponent } from "./project/inspiration/inspiration.component";
 import { WorkBreakdownComponent } from "./project/work-breakdown/work-breakdown.component";
@@ -19,22 +18,20 @@ import { ProjectDetailComponent } from "./project/project-detail/project-detail.
 import { ProjectFinancialsComponent } from "./project/project-detail/project-financials/project-financials.component";
 import { ProjectFormComponent } from "./project/project-form/project-form.component";
 import { NewProjectSubmissionComponent } from "./project/project-form/new-project-submission/new-project-submission.component";
+import { NavbarComponent } from "./navbar/navbar.component";
 
 
 const appRoutes: Routes = [
-  { path: "", redirectTo: "/welcomehome", pathMatch: "full" },
-  {
-    path: "welcomehome", component: EnterHomeComponent, children: [
+  { path: "", component: EnterHomeComponent, children: [
       { path: "signup", component: SignUpComponent },
       { path: "login", component: SignInComponent },
     ]
   },
   {
-    path: "dashboard", component: UserHouseMainComponent, canActivate: [AuthGuard], children: [
-      { path: "user-profile", component: UserProfileComponent, children: [
-          {path: "update", component: UpdateUserComponent}
-      ]},
-      { path: "summary", component: HomeSummaryComponent },
+    path: "home", component: HomeSummaryComponent, canActivate: [AuthGuard]
+  },
+  {
+    path: "nav", component: NavbarComponent, canActivate: [AuthGuard], children: [
       { path: "projects", component: ProjectListComponent },
       { path: "project-details/:id", component: ProjectDetailComponent, children: [
         { path: "inspiration", component: InspirationComponent},
@@ -50,9 +47,8 @@ const appRoutes: Routes = [
       { path: "loan-form", component: LoanAmorizationFormComponent},
       { path: "general", component: ProjectCardComponent },
       { path: "maintenance", component: MaintenanceListComponent },
-  ]
+    ]
   },
-
 
 ]
 

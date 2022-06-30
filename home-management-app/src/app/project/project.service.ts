@@ -4,7 +4,6 @@ import { AuthService } from '../authentication/auth.service';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators'
-import { lastValueFrom } from 'rxjs';
 
 
 
@@ -100,6 +99,12 @@ export class ProjectService implements OnInit{
     this.projectDoc = this.afs.doc(`users/${this.authService.userData.uid}/projects/${project.id}`);
     this.projectDoc.delete();
     // this.projectDoc = this.afs.doc()
+
+  }
+
+  updateScope(project) {
+    this.projectDoc = this.afs.doc(`users/${this.authService.userData.uid}/projects/${project.id}`);
+    this.projectDoc.update({scope: 'test scope'})
   }
 
 }

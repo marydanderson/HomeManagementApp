@@ -2,7 +2,7 @@
   <!-- <nav class="navbar navbar-expand-lg bg-dark-blue" *ngIf="isAuthenticated"> -->
 
   <nav class="navbar navbar-expand-lg bg-dark-blue" >
-      <a class="navbar-title orange-text" routerLink="/dashboard/summary">Welcome home, {{user.email}}</a>
+      <!-- <a class="navbar-title orange-text" routerLink="/dashboard/summary">Welcome home, {{user.email}}</a> -->
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -10,10 +10,10 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" routerLink="/dashboard/summary">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-link" routerLink="/home">Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item dropdown" appDropdown>
-            <a class="nav-link" routerLink="/dashboard/maintenance" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link" routerLink="/nav/maintenance" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Maintenance
               <span class=dropdown-toggle></span></a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -22,26 +22,25 @@
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/dashboard/financials" >Financials</a>
+            <a class="nav-link" routerLink="/nav/financials" >Financials</a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" routerLink="/dashboard/projects" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" routerLink="/nav/projects" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Projects
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/rooms">Rooms</a>
+            <a class="nav-link" routerLink="/nav/rooms">Rooms</a>
           </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li class="nav-item mx-2">
-            <a class="nav-link" routerLink="/dashboard/user-profile">User Profile</a>
+            <a class="nav-link" routerLink="/home" (click)="false" >User Profile</a>
           </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li><button class="nav-signOut" (click)="onSignOut()"> Sign Out</button></li>
         </ul>
       </div>
-
-
   </nav>
+  <router-outlet></router-outlet>

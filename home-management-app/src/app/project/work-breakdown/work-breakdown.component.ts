@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
+import { Subject } from 'rxjs';
 import { Project } from '../project-detail/project.model';
 import { ProjectService } from '../project.service';
 
@@ -11,6 +12,7 @@ import { ProjectService } from '../project.service';
 export class WorkBreakdownComponent implements OnInit {
   project: Project;
   id: string;
+  editFormToggle = false;
 
   constructor(
     private projectService: ProjectService,
@@ -37,5 +39,11 @@ export class WorkBreakdownComponent implements OnInit {
   // Retrieve individual project w/ service from database
   getProject(idx: number) {
 
+  }
+
+  // for toggling view of 'scope edit form component' on/off
+  onEditClicked() {
+    console.log('form view shown')
+    this.editFormToggle = true;
   }
 }

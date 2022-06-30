@@ -36,6 +36,19 @@ export class LoanFormInput {
 //   ) { }
 // }
 
+
+
+// ------Object saved to firestore------
+export class CompiledLoanDataObject {
+  constructor(
+    public summary: Object,
+    public schedule: Object,
+    public totalInterest: number,
+    public purchasePrice: number,
+  ) { }
+}
+
+// For use in 'CompiledLoanDataObject' for schedule: xx
 export class LoanPaymentSchedule{
   constructor(
     public year: number,
@@ -45,6 +58,7 @@ export class LoanPaymentSchedule{
   ) { }
 }
 
+// For use in 'CompiledLoanDataObject' for summary: xx
 export class LoanApiSummary {
   constructor(
     public interestOnlyPayment: number,
@@ -52,16 +66,6 @@ export class LoanApiSummary {
     public numberPayments: number,
     public periodicIntRate: number,
     public totalPayments: number,
-
-  ) { }
-}
-
-export class CompiledLoanDataObject {
-  constructor(
-    public summary: Object,
-    public schedule: Object,
-    public totalInterest: number,
-    public purchasePrice: number,
   ) { }
 }
 

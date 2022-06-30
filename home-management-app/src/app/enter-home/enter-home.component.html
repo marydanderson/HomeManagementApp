@@ -1,24 +1,25 @@
-<div class="container">
-  <div class="row">
-    <div class="col-7">
-      <h1>Welcome Home.</h1>
-      <h3>Maintain. Design. Budget. Dream.</h3>
-      <br>
-      <button class="btn main-button" type="button" (click)="onLoginClick()"  routerLink="/welcomehome/login" >Login</button>
-      <button class="btn main-button mx-2" type="button" (click)="onSignupClick()"  routerLink="/welcomehome/signup" >Signup </button>
-    </div>
-    <div class="col">
-      <img src="/assets/Images/HouseOutline.png" alt="HouseOutline" width="100%" *ngIf="!isLoginMode && !isSignupMode">
-      <div class="card" *ngIf="isLoginMode || isSignupMode">
-        <div class="card-header text-center" *ngIf="isLoginMode">Log In</div>
-        <div class="card-header text-center" *ngIf="isSignupMode">Sign Up</div>
-        <div class="card-body">
-          <router-outlet ></router-outlet>
+<html>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-7">
+        <h1>Welcome Home.</h1>
+        <h3>Maintain. Design. Budget. Dream.</h3>
+        <br>
+        <button class="btn main-button" type="button" (click)="onLoginClick()"  routerLink="/login" >Login</button>
+        <button class="btn main-button mx-2" type="button" (click)="onSignupClick()"  routerLink="/signup" >Signup </button>
+      </div>
+      <div class="col">
+        <img src="/assets/Images/HouseOutline.png" alt="HouseOutline" width="100%" *ngIf="!isLoginMode && !isSignupMode">
+        <div class="card" *ngIf="isLoginMode || isSignupMode">
+          <div class="card-body">
+            <router-outlet ></router-outlet>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</html>
 
 
 

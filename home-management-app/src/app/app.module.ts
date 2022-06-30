@@ -15,7 +15,6 @@ import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { ProjectModule } from './project/project.module';
 import { RoomsModule } from './rooms/rooms-module';
 import { EnterHomeComponent } from './enter-home/enter-home.component';
-import { UserHouseMainComponent } from './user-house-main/user-house-main.component';
 import { LoanAmorizationFormComponent } from './financials/loan-amortization/loan-amorization-form-component';
 import { SharedModule } from './shared/shared.module';
 // Firebase
@@ -34,6 +33,8 @@ import { SignInComponent } from './authentication/sign-in/sign-in.component';
 import { SignUpComponent } from './authentication/sign-up/sign-up.component';
 import { UserProfileComponent } from './user/user-profile/user-profile.component';
 import { UpdateUserComponent } from './user/user-profile/update-user/update-user.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSliderModule } from '@angular/material/slider'
 
 @NgModule({
   declarations: [
@@ -46,7 +47,6 @@ import { UpdateUserComponent } from './user/user-profile/update-user/update-user
     ProjectWishComponent,
     HomeSummaryComponent,
     EnterHomeComponent,
-    UserHouseMainComponent,
     LoanAmorizationFormComponent,
     LoanDetailsComponent,
     FinancialHomeComponent,
@@ -54,6 +54,7 @@ import { UpdateUserComponent } from './user/user-profile/update-user/update-user
     SignUpComponent,
     UserProfileComponent,
     UpdateUserComponent,
+
   ],
   imports: [
     BrowserModule, //browser module can only be imported once
@@ -66,6 +67,8 @@ import { UpdateUserComponent } from './user/user-profile/update-user/update-user
     SharedModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
+    BrowserAnimationsModule,
+    MatSliderModule
   ],
   providers: [
     AuthService

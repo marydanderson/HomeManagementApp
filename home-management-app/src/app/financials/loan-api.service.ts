@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { exhaustMap, map, take } from 'rxjs/operators';
 import { AuthService } from '../authentication/auth.service';
 import { CompiledLoanDataObject, LoanApiSummary } from './loan-amortization/loan-amor.model';
 import { LoanPaymentSchedule } from './loan-amortization/loan-amor.model';
@@ -17,6 +16,12 @@ export class LoanApiService {
   loanCollection: AngularFirestoreCollection<CompiledLoanDataObject>;
   loanData: Observable<CompiledLoanDataObject[]>;
   loanDoc: AngularFirestoreCollection<CompiledLoanDataObject>;
+  loanDataForFirestore: CompiledLoanDataObject = {
+    summary: null,
+    schedule: null,
+    totalInterest: 0,
+    purchasePrice: 0
+  }
 
   constructor(private http: HttpClient, private authService: AuthService, private afs: AngularFirestore) {
     this.loanCollection = this.afs
@@ -28,7 +33,7 @@ export class LoanApiService {
   // API DOC: https://www.commercialloandirect.com/amortization-schedule-api.html
 
 
-// SAVE loan data from user input, then sent to API, calculated by API and sent back from API, to FIREBASE
+// SAVE loan data from user input, then sent to API, calculated by API and sent back from API, to Firestore
   saveLoanData(apiReturn, purchasePrice: number) {
     const compiledLoanData: CompiledLoanDataObject = {
       summary: this.saveLoanApiSummaryData(apiReturn),
@@ -36,26 +41,17 @@ export class LoanApiService {
       totalInterest: this.calculateTotalInterest(apiReturn),
       purchasePrice: purchasePrice
     }
-    // console.log('compiled data obj', compiledLoanData)
-
+    const json = JSON.parse(JSON.stringify(compiledLoanData));
+    console.log('json data: ', json)
 
     // Store on Firestore
-    this.loanCollection.add(compiledLoanData)
+    this.loanCollection.add(json)
       .then((dataAdded) => {
         console.log('compiled loan data API added to firestore: ', dataAdded)
       })
       .catch((error) => {
       console.error('Error adding loan data document', error)
     })
-    // // store on firebase
-    // this.http.post('https://house-management-91707-default-rtdb.firebaseio.com/financials/loan.json',
-    //   compiledLoanData
-    // ).subscribe(responseData => {
-    //   responseData
-    // })
-    // this.myLoanData = compiledLoanData;
-    // console.log(this.myLoanData)
-    // return this.myLoanData
   }
 
   // GET / LOAD LOAN DATA

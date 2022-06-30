@@ -26,6 +26,7 @@ export class ProjectDetailComponent implements OnInit {
       // this.projectDoc = this.projectService.getProject(this.idx)
     })
 
+
     //Load / get the project from firestore
     this.projectService.getProject(this.idx)
       .subscribe(project => {

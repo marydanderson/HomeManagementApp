@@ -1,6 +1,5 @@
-import { ProjectScope } from "../project-scope.model";
 
-export class Project {
+export class Room {
   constructor(
     public id?: string,
     public name?: string,
@@ -8,8 +7,11 @@ export class Project {
     public description?: string,
     public status?: string,
     public grandTotal?: number,
-    public estTotal?: number,
+
     public created?: Date,
-    public scope?: string,
   ) {}
+}
+
+export class RoomList {
+  // room list array
 }

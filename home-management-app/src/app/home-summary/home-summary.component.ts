@@ -15,7 +15,7 @@ export class HomeSummaryComponent implements OnInit{
   user: User; //subscribe to user that's logged in from authService; extract key/values for use in HTML
 
 
-  constructor(private authService: AuthService, private projectService: ProjectService) {
+  constructor(private authService: AuthService) {
     this.onUserDataChange();
   }
 
@@ -26,7 +26,6 @@ export class HomeSummaryComponent implements OnInit{
 
   onSignOut() {
     this.authService.signOut();
-
   }
 
   onUserDataChange() {

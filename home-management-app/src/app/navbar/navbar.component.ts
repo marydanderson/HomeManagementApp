@@ -16,7 +16,7 @@ export class NavbarComponent implements OnInit {
   user: User; //subscribe to user that's logged in from authService; extract key/values for use in HTML
 
 
-  constructor(private authService: AuthService, private projectService: ProjectService) {
+  constructor(private authService: AuthService) {
     this.onUserDataChange();
   }
 
@@ -33,7 +33,7 @@ export class NavbarComponent implements OnInit {
   onUserDataChange() {
     this.authService.dataObsevable.subscribe((dataChange) => {
       this.user = dataChange;
-      console.log('subscribed data change', this.user.displayName);
+      // console.log('subscribed data change', this.user.displayName);
     });
   }
 

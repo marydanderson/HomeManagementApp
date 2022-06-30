@@ -1,51 +1,52 @@
-<div class="container-signout">
-  <div class="row justify-content-start">
-    <div class="col text-left">
-      <button class="btn main-button" (click)="onSignOut()">Sign Out</button>
-      <span class="welcome-heading my-1">
-        Welcome home, {{user.displayName}}
 
-      </span>
-    </div>
-  </div>
-</div>
 <div class="container-bg">
-  <div class="row justify-content-end">
-    <div class="col text-right navbar-heading" >
-      <a routerLink="/dashboard/projects">
-        Projects
-      </a>
+  <div class="container-signout">
+    <div class="row justify-content-start">
+      <div class="col text-left">
+        <button class="btn main-button" (click)="onSignOut()">Sign Out</button>
+        <span class="welcome-heading my-1">
+          Welcome home, {{user.displayName}}
+        </span>
+      </div>
     </div>
   </div>
-  <div class="row justify-content-end" >
-    <div class="col text-right  navbar-heading">
-      <a routerLink="/dashboard/financials">
-        Financials
-      </a>
+  <div class="container-nav">
+    <div class="row justify-content-end">
+      <div class="col text-right navbar-heading" >
+        <a routerLink="/nav/projects">
+          Projects
+        </a>
+      </div>
     </div>
-  </div>
-  <div class="row justify-content-end">
-    <div class="col text-right  navbar-heading">
-      <a  routerLink="/rooms">
-        Rooms
-      </a>
+    <div class="row justify-content-end" >
+      <div class="col text-right  navbar-heading">
+        <a routerLink="/nav/financials">
+          Financials
+        </a>
+      </div>
     </div>
-  </div>
-  <div class="row justify-content-end">
-    <div class="col text-right  navbar-heading" >
-      <a routerLink="/dashboard/maintenance">
-        Maintenance
-      </a>
+    <div class="row justify-content-end">
+      <div class="col text-right  navbar-heading">
+        <a  routerLink="/nav/rooms">
+          Rooms
+        </a>
+      </div>
     </div>
-  </div>
-  <div class="row justify-content-end">
-    <div class="col text-right  navbar-heading" >
-      <a routerLink="/dashboard/maintenance">
-        User Profile
-      </a>
+    <div class="row justify-content-end">
+      <div class="col text-right  navbar-heading" >
+        <a routerLink="/nav/maintenance">
+          Maintenance
+        </a>
+      </div>
     </div>
-  </div>
+    <div class="row justify-content-end">
+      <div class="col text-right  navbar-heading" >
+        <a >
+          User Profile
+        </a>
+      </div>
+    </div>
 
+  </div>
 </div>
-
 

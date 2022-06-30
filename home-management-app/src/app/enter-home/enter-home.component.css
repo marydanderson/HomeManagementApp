@@ -49,6 +49,10 @@ h3 {
   padding-top: 4%;
 }
 
+html {
+  background-color: var(--main-blue);
+}
+
 /* CSS */
 .main-button {
   font-family: 'Raleway', sans-serif;

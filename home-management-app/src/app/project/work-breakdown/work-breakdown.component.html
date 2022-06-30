@@ -2,48 +2,29 @@
 <div class="container bg-light">
   <div class="row">
     <div class="col">
-      <div id="table" class="table-editable">
-        <span class="table-add float-right mb-3 mr-2"
-          ><a href="#!" class="text-success"
-            ><i class="fas fa-plus fa-2x" aria-hidden="true"></i></a
-        ></span>
-        <table class="table table-bordered table-responsive-md table-striped text-center">
-          <thead>
-            <tr>
-              <th class="text-center">Name</th>
-              <th class="text-center">Details</th>
-              <th class="text-center">Qty</th>
-              <th class="text-center">Qty Unit</th>
-              <th class="text-center">Unit Price</th>
-              <th class="text-center">Calculated Price</th>
-              <th class="text-center">URL</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="pt-3-half" contenteditable="true">{{project.scope.name}}</td>
-              <td class="pt-3-half" contenteditable="true">{{project.scope.details}}</td>
-              <td class="pt-3-half" contenteditable="true">{{project.scope.qty}}</td>
-              <td class="pt-3-half" contenteditable="true">{{project.scope.qtyUnit}}</td>
-              <td class="pt-3-half" contenteditable="true">{{project.scope.unitPrice}}</td>
-              <td class="pt-3-half" contenteditable="true">{{project.scope.calculatedPrice}}</td>
-              <td class="pt-3-half" contenteditable="true">{{project.scope.url}}</td>
-              <td class="pt-3-half">
-                <span class="table-up"
-                  ><a href="#!" class="indigo-text"
-                    ><i class="fas fa-long-arrow-alt-up" aria-hidden="true"></i></a
-                ></span>
-                <span class="table-down"
-                  ><a href="#!" class="indigo-text"
-                    ><i class="fas fa-long-arrow-alt-down" aria-hidden="true"></i></a
-                ></span>
-              </td>
-              <td>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Details</th>
+            <th scope="col">Qty</th>
+            <th scope="col">Qty Unit</th>
+            <th scope="col">Unit Price</th>
+            <th scope="col">Calculated Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <!-- <th scope="row">{{project.scope.name}}</th>
+            <td>{{project.scope.details}}</td>
+            <td>{{project.scope.qty}}</td>
+            <td>{{project.scope.qtyUnit}}</td>
+            <td>{{project.scope.unitPrice}}</td>
+            <td>{{project.scope.calculatedPrice}}</td> -->
+            <td><button class="btn btn-primary" (click)="onEditClicked()">Edit</button></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
   <div class="row">
@@ -51,9 +32,10 @@
       <button class="btn btn-primary" type="button" (click)="addScope()">Add Scope</button>
     </div>
   </div>
+
+  <app-work-form *ngIf="editFormToggle" [editFormToggle]="editFormToggle"></app-work-form>
 </div>
 
-<app-work-form></app-work-form>
 
 <!--
 export class ProjectScope {
