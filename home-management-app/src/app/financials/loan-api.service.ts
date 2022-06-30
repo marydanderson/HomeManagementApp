@@ -13,7 +13,7 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument}
 })
 export class LoanApiService {
   // loanData = new Subject();
-  loanCollection: AngularFirestoreCollection<CompiledLoanDataObject>;
+  loanCollectionRef: AngularFirestoreCollection<CompiledLoanDataObject>;
   loanData: Observable<CompiledLoanDataObject[]>;
   loanDoc: AngularFirestoreCollection<CompiledLoanDataObject>;
   loanDataForFirestore: CompiledLoanDataObject = {
@@ -24,13 +24,12 @@ export class LoanApiService {
   }
 
   constructor(private http: HttpClient, private authService: AuthService, private afs: AngularFirestore) {
-    this.loanCollection = this.afs
+    this.loanCollectionRef = this.afs
       .collection('users')
       .doc(this.authService.userData.uid)
       .collection('loan');
    }
 
-  // API DOC: https://www.commercialloandirect.com/amortization-schedule-api.html
 
 
 // SAVE loan data from user input, then sent to API, calculated by API and sent back from API, to Firestore
@@ -45,7 +44,7 @@ export class LoanApiService {
     console.log('json data: ', json)
 
     // Store on Firestore
-    this.loanCollection.add(json)
+    this.loanCollectionRef.add(json)
       .then((dataAdded) => {
         console.log('compiled loan data API added to firestore: ', dataAdded)
       })
@@ -54,18 +53,13 @@ export class LoanApiService {
     })
   }
 
-  // GET / LOAD LOAN DATA
-  getLoanData() {
-      return this.http.get(
-        'https://house-management-91707-default-rtdb.firebaseio.com/financials/loan.json')
-        .subscribe(responseData => {
-          // emit the data so our components can subscribe to it
-          // this.loanData.next(responseData)
-        });
-
+  // FUTURE ---> MOVE THIS TO SEP. FINANCIAL SERVICE; Goal is to have a sep. service for the api
+  getLoanData(): AngularFirestoreCollection<CompiledLoanDataObject> {
+    return this.loanCollectionRef;
   }
 
-
+// ------------- API RETRIEVAL---------------
+// ---------API DOC: https://www.commercialloandirect.com/amortization-schedule-api.html----------
   private saveLoanApiSummaryData(apiReturn) {
     // -------Format Loan Summary API Return------------
       // Grab first item in API array = loan summary
@@ -91,10 +85,8 @@ export class LoanApiService {
 
   private calculateTotalInterest(apiReturn) {
     let data: LoanPaymentSchedule[] = this.formatScheuleData(apiReturn);
-    let totalInterest = 0;
-    data.forEach((paymentFreq) => {
-      totalInterest += paymentFreq.intererstPaid;
-    })
+    let lastYearSummaryIndex = data.pop();
+    let totalInterest = lastYearSummaryIndex.intererstPaid
     console.log('total loan inteest', totalInterest)
     return totalInterest;
   }

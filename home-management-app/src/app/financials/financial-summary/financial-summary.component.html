@@ -1,65 +1,82 @@
 
 <div class="container opaque-background">
   <div class="row text-center">
-    <div class="col-md">
+    <div class="col-md" >
       <h1>
         Financial Summary
       </h1>
     </div>
   </div>
-  <div class="row text-center">
-    <div class="col-md">
-      <h3>
-        Interest to Date
-      </h3>
-      <div class="number-totals">
-        $5,000
-      </div>
-        <div class="number-totals hover-info">
-          Your total paid mortgage interest to date, projected to the end of the current year
-        </div>
-    </div>
-    <div class="col-md">
-      <h3>
-        Completed Project Costs
-      </h3>
-      <div class="number-totals">
-        $10,000
-      </div>
-        <div class="number-totals hover-info">
-          This is the grand total final costs of all your projects to date.
-        </div>
-    </div>
-    <div class="col-md">
-      <h3>
-        Home Purchase Price
-      </h3>
-      <div class="number-totals">
-        $400,000
-      </div>
-      <div class="number-totals hover-info">
-        Purchase price (including closing costs)
+  <div *ngIf="!loanDataFound">
+    <div class="row text-center">
+      <div class="col">
+        <h3>No loan data found!</h3>
+        <h3>
+          Input your mortgate info to track your costs to date!
+        </h3>
+        <p>
+          <a routerLink="/nav/loan-form">
+            <button class="main-button">Add Loan Data</button>
+          </a>
+        </p>
       </div>
     </div>
   </div>
-  <div class="row text-center">
-    <div class="col-md">
-      <h3>
-        Total Investment
-      </h3>
-      <div class="number-totals">
-        $30,000
+  <div *ngIf="loanDataFound">
+    <div class="row text-center" >
+      <div class="col-md" *ngFor="let loan of compiledLoanData">
+        <h3>
+          Interest at End of Loan <!--future INTEREST TO DATE-->
+        </h3>
+        <div class="number-totals">
+          ${{loan.totalInterest}}
+        </div>
+          <div class="number-totals hover-info">
+            Your total paid mortgage interest to date, projected to the end of the current year
+          </div>
       </div>
-      <div class="number-totals hover-info">
-        Interest to date + completed project costs + home purchase price. This is your break even home price if you sold it right now.
+      <div class="col-md">
+        <h3>
+          Completed Project Costs
+        </h3>
+        <div class="number-totals">
+          --$10,000--
+        </div>
+          <div class="number-totals hover-info">
+            This is the grand total final costs of all your projects to date.
+          </div>
+      </div>
+      <div class="col-md" *ngFor="let loan of compiledLoanData">
+        <h3>
+          Home Purchase Price
+        </h3>
+        <div class="number-totals">
+          ${{loan.purchasePrice}}
+        </div>
+        <div class="number-totals hover-info">
+          Purchase price (including closing costs)
+        </div>
       </div>
     </div>
-    <div class="col-md">
-      <h3>
-        Comp Home Values
-      </h3>
-      <div class="number-totals">
-        API HERE
+    <div class="row text-center">
+      <div class="col-md">
+        <h3>
+          Total Investment
+        </h3>
+        <div class="number-totals">
+          --$30,000--
+        </div>
+        <div class="number-totals hover-info">
+          Interest to date + completed project costs + home purchase price. This is your break even home price if you sold it right now.
+        </div>
+      </div>
+      <div class="col-md">
+        <h3>
+          Comp Home Values
+        </h3>
+        <div class="number-totals">
+          API HERE
+        </div>
       </div>
     </div>
   </div>

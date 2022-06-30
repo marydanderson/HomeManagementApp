@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { CompiledLoanDataObject, LoanApiSummary, LoanFormInput } from './loan-amor.model';
 import { LoanPaymentSchedule } from './loan-amor.model';
 import { LoanApiService } from '../loan-api.service';
+import { Route, Router } from '@angular/router';
 
 
 @Component({
@@ -22,7 +23,7 @@ export class LoanAmorizationFormComponent implements OnInit {
   purchasePrice: number = 0;
   // for initializing blank Compiled loan object for firestore:
 
-  constructor(private http: HttpClient, private loanApiService: LoanApiService) { }
+  constructor(private http: HttpClient, private loanApiService: LoanApiService, private router: Router) { }
 
   ngOnInit(): void {
 
@@ -54,13 +55,13 @@ export class LoanAmorizationFormComponent implements OnInit {
       &cf=${compoundFreq}
       &pt=0&mode=json`
     )
-      .subscribe((apiResponse => {
+      .subscribe((apiResponse) => {
         // Find Age of Loan
         this.loanApiService.calculateUpToYearInterest(apiResponse, this.calculateLoanAge(loanOriginationDate))
         this.loanApiService.saveLoanData(apiResponse, this.purchasePrice) // save loan Data (summary, payment summary, total interest)
-
       }
-      ));
+      );
+      this.router.navigateByUrl('/nav/financials')
 
   }
 

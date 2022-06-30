@@ -11,7 +11,7 @@ import { ProjectWishComponent } from './project/project-wish/project-wish.compon
 import { HomeSummaryComponent } from './home-summary/home-summary.component';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
+import {HttpClientModule, } from '@angular/common/http';
 import { ProjectModule } from './project/project.module';
 import { RoomsModule } from './rooms/rooms-module';
 import { EnterHomeComponent } from './enter-home/enter-home.component';

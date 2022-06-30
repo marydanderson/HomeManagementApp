@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { ProjectScope } from '../project-scope.model';
 import { AuthService } from 'src/app/authentication/auth.service';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
-import { Project } from '../project-detail/project.model';
 import { ProjectService } from '../project.service';
+import Project from '../project-detail/project.model';
 
 
 @Injectable({

@@ -16,27 +16,48 @@
           </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let projectItem of projectList; let i = index" >
-            <td scope="row"><a style="cursor: pointer"[routerLink]="['/nav/project-details', projectItem.id]">{{projectItem.name}}</a></td>
-              <td>{{projectItem.room}}</td>
-              <td>{{projectItem.description}}</td>
-              <td>{{projectItem.status}}</td>
+            <tr *ngFor="let project of projects; let i = index">
+            <!-- <td scope="row"><a style="cursor: pointer"[routerLink]="['/nav/project-details', project.id]">{{project.name}}</a></td> -->
+            <td scope="row" [class.active]="i == currentIndex" (click)="setActiveProject(project, i)">{{project.name}}</td>
+              <td>{{project.room}}</td>
+              <td>{{project.description}}</td>
+              <td>{{project.status}}</td>
               <td>
                 <div class="dropdown" appDropdown>
                   <button class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" role="button" >Actions</button>
                     <div class="dropdown-menu">
-                      <a class="dropdown-item" (click)="onEditItem(i)" style="cursor: pointer">Edit</a>
-                      <a class="dropdown-item" (click)="removeProject(projectItem)"  style="cursor: pointer">Delete</a>
+                      <!-- <a class="dropdown-item" (click)="onEditItem(i)" style="cursor: pointer">Edit</a> -->
+                      <!-- <a class="dropdown-item" (click)="removeProject(projectItem)"  style="cursor: pointer">Delete</a> -->
                     </div>
                 </div>
               </td>
-              <td>{{projectItem.id}}</td>
+              <td>{{project.id}}</td>
             </tr>
         </tbody>
       </table>
     </div>
   </div>
 </div>
+
+<div *ngIf="currentProject">
+  <app-project-detail (refreshList)="refreshList()" [project]="currentProject"></app-project-detail>
+</div>
+<div *ngIf="!currentProject">
+  <br>
+  <p>Click on a project</p>
+</div>
+
+<!-- <div class="container">
+  <h1>Projects</h1>
+  <button class="btn secondary-button my-2" [routerLink]="['/nav/add-new-project']">Add New Project</button>
+  <div class="row">
+    <div class="col">
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let project of projects; let i = index" [class.active]="i==currentIndex"></li>
+      </ul>
+    </div>
+  </div>
+</div> -->
 
 
 <!-- [routerLink]="['/project-details', projectItem.id]" -->

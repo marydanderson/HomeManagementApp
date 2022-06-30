@@ -3,21 +3,20 @@
 
   <div class="row">
 
-    <div class="col-7" *ngIf="!submittedStatus">
+    <div class="col-7" *ngIf="!submitted">
       <h4>Create New Project</h4>
-      <form (ngSubmit)="onSubmit(projectForm)" #projectForm="ngForm">
+      <form #projectForm="ngForm">
         <div class="form-group">
           <label for="projectName">Name:</label>
           <input type="text"
             class="form-control"
             id="projectName"
             placeholder="Enter project name"
-            ngModel
+            [(ngModel)]="project.name"
             name="projectName"
-            required
-            #projectName="ngModel">
-          <span class="help-block"
-            *ngIf="!projectName.valid && projectName.touched">Please enter valid name</span>
+            required>
+          <!-- <span class="help-block"
+            *ngIf="!projectName.valid && projectName.touched">Please enter valid name</span> -->
         </div>
         <div class="form-group">
           <label for="projectRoom">Room:</label>
@@ -25,7 +24,7 @@
             class="form-control"
             id="projectRoom"
             placeholder="Enter project room"
-            ngModel
+            [(ngModel)]="project.room"
             name="projectRoom"
             required>
         </div>
@@ -35,7 +34,7 @@
             class="form-control"
             id="projectDescription"
             placeholder="Enter project description"
-            ngModel
+            [(ngModel)]="project.description"
             name="projectDescription"
             ></textarea>
         </div>
@@ -45,7 +44,7 @@
                 <input
                   type="radio"
                   name="projectStatus"
-                  ngModel
+                  [(ngModel)]="project.status"
                   [value]="status"
                   required>
                   {{status}}
@@ -58,7 +57,7 @@
             class="form-control"
             id="projectEstTotal"
             placeholder="Enter grand total"
-            ngModel
+            [(ngModel)]="project.estTotal"
             name="estTotal"
             required
             pattern="^[1-9]+[0-9]*$"> <!--enter number > 0-->
@@ -69,15 +68,15 @@
 
     <!-- show data submitted data -->
     <div class="col-8 mx-auto">
-      <div *ngIf="submittedStatus">
+      <div *ngIf="submitted">
         <div>
         <div class="card">
           <div class="card-body">
             <h4 class="card-title">SUCCESS! New Project Added:</h4>
-            <p>Project name: {{projectDetails.name}}</p>
-            <p>Project Descrip: {{projectDetails.description}} </p>
-            <p>Project Status: {{projectDetails.status}} </p>
-            <p>Estimated Grand Total: {{projectDetails.estTotal}} </p>
+            <p>Project name: {{project.name}}</p>
+            <p>Project Descrip: {{project.description}} </p>
+            <p>Project Status: {{project.status}} </p>
+            <p>Estimated Grand Total: {{project.estTotal}} </p>
             <div class="text-center">
               <a [routerLink]="['/nav/projects']" class="btn btn-secondary">Return to All Projects</a>
             </div>

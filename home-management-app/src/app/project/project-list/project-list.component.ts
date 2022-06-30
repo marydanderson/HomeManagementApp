@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectService } from '../project.service';
-import { Project } from '../project-detail/project.model';
-import { ActivatedRoute, ParamMap } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AuthService } from 'src/app/authentication/auth.service';
-import { Observable } from 'rxjs';
+import Project from '../project-detail/project.model';
+import { map } from 'rxjs/operators'
 
 
 @Component({
@@ -15,10 +12,10 @@ import { Observable } from 'rxjs';
   styleUrls: ['./project-list.component.css']
 })
 export class ProjectListComponent implements OnInit {
-  projectList: Project[] = [];
-  id: number;
-  addNewProject: boolean = false;
-  projects: any;
+  projects?: Project[];
+  currentProject?: Project;
+  currentIndex = -1;
+  title = '';
 
   constructor(
     private projectService: ProjectService,
@@ -28,28 +25,31 @@ export class ProjectListComponent implements OnInit {
 
   ngOnInit(): void {
     // http request to pre load projects in database
-    this.projectService.getProjects().subscribe(projects => {
-      console.log('subscribed projects: ', projects);
-      this.projectList = projects;
-    });
+    this.retrieveProjects();
   }
 
-
-
-  removeProject(project) {
-    this.projectService.deleteProject(project)
+  refreshList() {
+    this.currentProject = undefined;
+    this.currentIndex = -1;
+    this.retrieveProjects();
   }
 
-  addNewProjectTrue() {
-    console.log('new project added');
-    this.addNewProject = true;
+  retrieveProjects() {
+    this.projectService.getAllProjects().snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c =>
+          ({ id: c.payload.doc.id, ...c.payload.doc.data() })
+        )
+      )
+    ).subscribe(data => {
+      this.projects = data;
+    })
   }
 
-  // When indv. 'edit' button is clicked for a project, go to the form to edit it
-  onEditItem(index: number) {
-
+  setActiveProject(project: Project, index: number) {
+    this.currentProject = project;
+    this.currentIndex = index
   }
 
-  // create method that can be reused to fetch data from http
 
 }

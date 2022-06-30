@@ -1,37 +1,60 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { ProjectService } from '../project.service';
-import { Project } from './project.model';
+import Project from './project.model';
 
 @Component({
   selector: 'app-project-detail',
   templateUrl: './project-detail.component.html',
   styleUrls: ['./project-detail.component.css']
 })
-export class ProjectDetailComponent implements OnInit {
+export class ProjectDetailComponent implements OnInit, OnChanges {
 
-  project: Project;
-  idx: number;
+  @Input() project?: Project;
+  @Output() refreshList: EventEmitter<any> = new EventEmitter();
+  currentProject: Project = {
+    name: '',
+    room: '',
+    description: '',
+    status: '',
+    grandTotal: null,
+    estTotal: null,
+    created: null,
+    scope: null
+  };
+  message = '';
 
   constructor(
-    private route: ActivatedRoute,
     private projectService: ProjectService,
   ) { }
 
   ngOnInit(): void {
-    // Get project firestore ID from route
-    this.route.params.subscribe((params: Params) => {
-      this.idx = params['id'];
-      console.log('project params idx: ', this.idx)
-      // this.projectDoc = this.projectService.getProject(this.idx)
-    })
-
-
-    //Load / get the project from firestore
-    this.projectService.getProject(this.idx)
-      .subscribe(project => {
-        console.log('subscribed project: ', project.name);
-        this.project = project;
-    });
+    this.message = '';
   }
+
+  ngOnChanges(): void {
+    this.message = '';
+    this.currentProject = {...this.currentProject}
+  }
+
+  updateProject() {
+    const data: Project = {
+      name: this.currentProject.name,
+      room: this.currentProject.room,
+      description: this.currentProject.description,
+      status: this.currentProject.status,
+      grandTotal: this.currentProject.grandTotal,
+      estTotal: this.currentProject.estTotal,
+      created: this.currentProject.created,
+      scope: this.currentProject.scope
+    }
+    if (this.currentProject.id) { //id is assigned by index in project-list html ngIf (only an ID if it's selected)
+      this.projectService.updateProject(this.currentProject.id, data)
+        .then(() => this.message = 'Updated!')
+        .catch(err => console.log(err))
+
+    }
+  }
+
+
+
 }

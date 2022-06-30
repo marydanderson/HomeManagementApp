@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Subject } from 'rxjs';
-import { Project } from '../project-detail/project.model';
+import Project from '../project-detail/project.model';
 import { ProjectService } from '../project.service';
 
 @Component({
@@ -26,9 +25,9 @@ export class WorkBreakdownComponent implements OnInit {
       console.log(this.id)
     })
 
-    this.projectService.getProject(this.id).subscribe(projectData => {
-      this.project = projectData;
-    });
+    // this.projectService.getProject(this.id).subscribe(projectData => {
+    //   this.project = projectData;
+    // });
   }
 
   addScope() {
