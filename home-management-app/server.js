@@ -5,11 +5,11 @@ const express = require("express");
 const app = express();
 
 //Serve static build files from the "dist" directory
-app.use(express.static("./dist/home-manager-app"));
+app.use(express.static("./dist/home-management-app"));
 
 // Route incoming server request to the correct files
 app.get("/*", (req, res) => {
-  res.sendFile("index.html", { root: "dist/home-manager-app" })
+  res.sendFile("index.html", { root: "dist/home-management-app" })
 });
 
 //Sstart the app on the default Heroku port
