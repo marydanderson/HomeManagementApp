@@ -1,11 +1,8 @@
-<!---------------------- TEMPLATE DRIVEN APPROACH START ------------------------->
 <div class="container" >
-
   <div class="row">
-
-    <div class="col-7" *ngIf="!submitted">
+    <div class="col-7" *ngIf="!submitted" >
       <h4>Create New Project</h4>
-      <form #projectForm="ngForm">
+      <form #projectForm="ngForm" (ngSubmit)="addProjectToDatabase()">
         <div class="form-group">
           <label for="projectName">Name:</label>
           <input type="text"
@@ -15,8 +12,6 @@
             [(ngModel)]="project.name"
             name="projectName"
             required>
-          <!-- <span class="help-block"
-            *ngIf="!projectName.valid && projectName.touched">Please enter valid name</span> -->
         </div>
         <div class="form-group">
           <label for="projectRoom">Room:</label>
@@ -60,7 +55,7 @@
             [(ngModel)]="project.estTotal"
             name="estTotal"
             required
-            pattern="^[1-9]+[0-9]*$"> <!--enter number > 0-->
+            pattern="^[1-9]+[0-9]*$">
         </div>
         <button type="submit" class="btn btn-primary" [disabled]="!projectForm.valid">Submit</button>
       </form>

@@ -1,8 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
 import { AuthService } from '../authentication/auth.service';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators'
 import Project from './project-detail/project.model';
 
 
@@ -27,7 +25,8 @@ export class ProjectService implements OnInit{
   }
 
   createProject(project: Project): any {
-    return this.projectsFirestoreRef.add({...project})
+    return this.projectsFirestoreRef.add({ ...project })
+      .then((docRef) => this.updateProject(docRef.id, { id: docRef.id })) // assigned Project ID key to Firestore created doc ID
   }
 
   updateProject(id: string, data: any): Promise<void> {
@@ -45,3 +44,5 @@ export class ProjectService implements OnInit{
   // }
 
 }
+
+

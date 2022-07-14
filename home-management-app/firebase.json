@@ -1,7 +1,7 @@
 {
   "hosting": {
     "target": "home-management-app",
-    "public": "dist/home-management-app",
+    "public": "../home-management-app",
     "ignore": [
       "**/.*"
     ],
@@ -31,5 +31,9 @@
         "destination": "/index.html"
       }
     ]
+  },
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
   }
 }

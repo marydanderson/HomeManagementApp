@@ -1,6 +1,5 @@
 
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
 import Project from '../project-detail/project.model';
 import { ProjectService } from '../project.service';
 
@@ -12,11 +11,10 @@ import { ProjectService } from '../project.service';
 export class ProjectFormComponent implements OnInit {
   project: Project = new Project();
   submitted = false;
-  statuses = ['future, ongoing, complete']
+  statuses = ['Future', 'Ongoing', 'Complete']
 
   constructor(
     private projectService: ProjectService,
-    private route: ActivatedRoute,
     ) { }
 
   ngOnInit(): void {
@@ -24,15 +22,16 @@ export class ProjectFormComponent implements OnInit {
   }
 
   addProjectToDatabase() {
-    this.projectService.createProject(this.project).then(() => {
-      console.log('project added to database!');
-      this.submitted = true;
-    })
+    console.log(this.project.name)
+    this.project.id =
+      this.projectService.createProject(this.project);
+    this.submitted = true;
   }
 
   initializeNewProject() {
     this.submitted = false;
     this.project = new Project();
   }
+
 
 }

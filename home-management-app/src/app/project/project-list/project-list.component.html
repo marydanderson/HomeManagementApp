@@ -1,50 +1,77 @@
-
-<div class="container">
-  <h1>Projects</h1>
-  <button class="btn secondary-button my-2" [routerLink]="['/nav/add-new-project']">Add New Project</button>
-  <div class="row">
-    <div class="col">
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th scope="col">Project Name</th>
-            <th scope="col">Room</th>
-            <th scope="col">Description</th>
-            <th scope="col">Status</th>
-            <th scope="col">Total Cost</th>
-            <th scope="col"></th>
-          </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let project of projects; let i = index">
-            <!-- <td scope="row"><a style="cursor: pointer"[routerLink]="['/nav/project-details', project.id]">{{project.name}}</a></td> -->
-            <td scope="row" [class.active]="i == currentIndex" (click)="setActiveProject(project, i)">{{project.name}}</td>
-              <td>{{project.room}}</td>
-              <td>{{project.description}}</td>
-              <td>{{project.status}}</td>
-              <td>
-                <div class="dropdown" appDropdown>
-                  <button class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" role="button" >Actions</button>
-                    <div class="dropdown-menu">
-                      <!-- <a class="dropdown-item" (click)="onEditItem(i)" style="cursor: pointer">Edit</a> -->
-                      <!-- <a class="dropdown-item" (click)="removeProject(projectItem)"  style="cursor: pointer">Delete</a> -->
+<div class="bg-blue">
+  <div class="container">
+    <h1>Projects</h1>
+    <button class="btn secondary-button my-3 mx-2" [routerLink]="['/nav/add-new-project']">Add New Project</button>
+    <button class="btn btn-outline-secondary" (click)="changeFilterStatus()"> <!--FILTER BUTTON-->
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filter" viewBox="0 0 16 16">
+        <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
+      </svg>
+    </button>
+    <div class="row">
+      <div class="col">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col"> Project Name
+                <div *ngIf="filterSelected">
+                  <label for="filterName"></label>
+                  <input type="text" name="filterName">
+                </div>
+              </th>
+              <th scope="col">Room
+                <div *ngIf="filterSelected">
+                  <label for="filterRoom"></label>
+                  <input type="text" name="filterRoom">
+                </div>
+              </th>
+              <th scope="col">Description
+                <div *ngIf="filterSelected">
+                  <label for="filterDesc"></label>
+                  <input type="text" name="filterDesc">
+                </div>
+              </th>
+              <th scope="col">Status
+                <div *ngIf="filterSelected" class="dropdown" appDropdown>
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown">Select</button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item" style="cursor: pointer" *ngFor="let status of statuses">{{status}}</a>
                     </div>
                 </div>
-              </td>
-              <td>{{project.id}}</td>
+              </th>
+              <th scope="col"></th>
             </tr>
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+              <tr *ngFor="let project of projects; let i = index">
+              <!-- <td scope="row"><a style="cursor: pointer"[routerLink]="['/nav/project-details', project.id]">{{project.name}}</a></td> -->
+              <td scope="row" [class.active]="i == currentIndex" (click)="setActiveProject(project, i)">{{project.name}}</td>
+                <td>{{project.room}}</td>
+                <td>{{project.description}}</td>
+                <td>{{project.status}}</td>
+                <td>
+                  <div class="dropdown" appDropdown>
+                    <button class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" role="button" >Actions</button>
+                      <div class="dropdown-menu">
+                        <!-- <a class="dropdown-item" (click)="onEditItem(i)" style="cursor: pointer">Edit</a> -->
+                        <a class="dropdown-item" (click)="deleteProject(project)"  style="cursor: pointer">Delete</a>
+                      </div>
+                  </div>
+                </td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
-</div>
 
-<div *ngIf="currentProject">
-  <app-project-detail (refreshList)="refreshList()" [project]="currentProject"></app-project-detail>
-</div>
-<div *ngIf="!currentProject">
-  <br>
-  <p>Click on a project</p>
+  <div *ngIf="currentProject">
+    <app-project-detail (refreshList)="refreshList()" [project]="currentProject"></app-project-detail>
+  </div>
+  <div *ngIf="!currentProject">
+    <br>
+    <p>Click on a project</p>
+  </div>
+
 </div>
 
 <!-- <div class="container">

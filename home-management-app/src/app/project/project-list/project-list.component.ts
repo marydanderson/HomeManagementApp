@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectService } from '../project.service';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { AuthService } from 'src/app/authentication/auth.service';
 import Project from '../project-detail/project.model';
 import { map } from 'rxjs/operators'
 
@@ -15,17 +13,21 @@ export class ProjectListComponent implements OnInit {
   projects?: Project[];
   currentProject?: Project;
   currentIndex = -1;
-  title = '';
+  filterSelected = false //for ngIf hiding/showing filter search bar
+  statuses = ['Future', 'Ongoing', 'Complete']
+
 
   constructor(
     private projectService: ProjectService,
-    private afs: AngularFirestore,
-    private authService: AuthService
     ) { }
 
   ngOnInit(): void {
-    // http request to pre load projects in database
+    // load projects from Firestore
     this.retrieveProjects();
+  }
+
+  changeFilterStatus() {
+    this.filterSelected = !this.filterSelected;
   }
 
   refreshList() {
@@ -36,6 +38,8 @@ export class ProjectListComponent implements OnInit {
 
   retrieveProjects() {
     this.projectService.getAllProjects().snapshotChanges().pipe(
+      /* getAllProjects returns a list of observables; the outer map operator would emit an individual
+      Observable into the inner map operator which then allows me to access the payload data from the http response */
       map(changes =>
         changes.map(c =>
           ({ id: c.payload.doc.id, ...c.payload.doc.data() })
@@ -48,7 +52,13 @@ export class ProjectListComponent implements OnInit {
 
   setActiveProject(project: Project, index: number) {
     this.currentProject = project;
-    this.currentIndex = index
+    console.log('project index:', index)
+    this.currentIndex = index //index is the *ngFor array created in html, not the doc ID
+  }
+
+  deleteProject(project: Project) {
+    this.projectService.delete(project.id);
+    alert(`${project.name} was deleted`);
   }
 
 
