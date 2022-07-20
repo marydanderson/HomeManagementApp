@@ -19,6 +19,7 @@ import { ProjectFinancialsComponent } from "./project/project-detail/project-fin
 import { ProjectFormComponent } from "./project/project-form/project-form.component";
 import { NewProjectSubmissionComponent } from "./project/project-form/new-project-submission/new-project-submission.component";
 import { NavbarComponent } from "./navbar/navbar.component";
+import { RoomComponent } from "./rooms/room/room.component";
 
 
 const appRoutes: Routes = [
@@ -47,6 +48,7 @@ const appRoutes: Routes = [
       { path: "loan-form", component: LoanAmorizationFormComponent},
       { path: "general", component: ProjectCardComponent },
       { path: "maintenance", component: MaintenanceListComponent },
+      { path: "rooms", component: RoomComponent },
     ]
   },
 

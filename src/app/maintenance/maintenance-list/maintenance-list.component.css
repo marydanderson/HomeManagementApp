@@ -1,17 +1,9 @@
-.skyBlue  {
-  background-color: #CAEBF2 ;
-}
-
-.dark-gray  {
-  color: #A9A9A9;
-}
-
-.watermelon {
-  color: #FF3B3F
-}
-
 
 .gray  {
   color: #EFEFEF;
   background-color: #EFEFEF ;
+}
+
+.bg-blue {
+  background-color:#86B3D1;
 }

@@ -11,7 +11,7 @@
 
 .container-bg{
   background-image:  url('./housebackground.png');
-  background-size: cover;
+  background-size:cover;
   background-position: bottom left;
   margin: 0%;
   padding: 0%;
